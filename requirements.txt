@@ -1,0 +1,6 @@
+FastAPI
+uvicorn
+SQLAlchemy
+mysql-connector-python
+pydantic
+transformers
