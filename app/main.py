@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import router as api_router
 
-app = FastAPI()
+app = FastAPI(title="IMC API", description="API for IMC App", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,

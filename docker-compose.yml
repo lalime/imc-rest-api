@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: imc-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: imcdb
+      MYSQL_USER: imcuser
+      MYSQL_PASSWORD: imcpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build: .
+    # image: lalim/imc-rest-api-backend:latest
+    container_name: imc-backend
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: mysql+pymysql://imcuser:imcpassword@db:3306/imcdb
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    develop:
+      watch:
+        - path: .
+          target: /app
+          action: sync
+
+  frontend:
+    #  image: lalim/imc-frontend:latest
+    build:
+      context: ../imc-frontend
+    container_name: imc-frontend
+    depends_on:
+      - backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_RUN_PORT=5000
+    volumes:
+      - ../imc-frontend:/app
+    develop:
+      watch:
+        - path: ../imc-frontend
+          target: /app
+          action: sync
+
+volumes:
+  db_data:

@@ -61,6 +61,43 @@ You can access the API documentation at `http://127.0.0.1:8000/docs`.
 - **Calculate IMC**: `POST /calculate-imc`
 - **Get IMC History**: `GET /imc-history/{user_id}`
 
+
+------------------------------------------------
+
+## How to Start the MySQL Database
+
+You can start the MySQL database using Docker Compose. Make sure you have `docker-compose.yml` in your project root (see example above).
+
+### Steps
+
+1. **Open a terminal in your project directory.**
+
+2. **Run the following command:**
+   ```
+   docker-compose up -d db
+   ```
+
+   This will start the MySQL database container in the background.
+
+3. **To stop the database:**
+   ```
+   docker-compose down
+   ```
+
+4. **To check logs for the database:**
+   ```
+   docker-compose logs db
+   ```
+
+The MySQL instance will be available at `localhost:3306` (or `db:3306` from other containers in the same compose network).
+
+**Default credentials (as set in docker-compose.yml):**
+- Host: `localhost`
+- Port: `3306`
+- Database: `imcdb`
+- User: `imcuser`
+- Password: `imcpassword`
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or features.

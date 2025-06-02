@@ -1,6 +1,13 @@
-FastAPI
+fastapi
 uvicorn
-SQLAlchemy
+sqlalchemy
 mysql-connector-python
 pydantic
 transformers
+types-python-jose
+types-requests
+passlib[bcrypt]
+python-jose
+tenacity
+pymysql
+cryptography
